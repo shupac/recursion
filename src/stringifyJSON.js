@@ -21,16 +21,17 @@ var stringifyJSON = function (obj) {
     else if( Object.prototype.toString.call(obj) === '[object Object]' ) {
       strArr.unshift("{");
       for(var p in obj) {
-        if(obj[p]!==undefined) {
+		if(obj[p]!==undefined && typeof obj[p]!== 'function') {
+			//only stringifies key-value pair if value is not undefined or a function
             strArr.push(stringifyJSON(p));
             strArr.push(":");
+	        if(typeof obj[p] === 'number') {
+	            strArr.push("\""+obj[p]+"\"");
+	        }
+	        else strArr.push(stringifyJSON(obj[p]));
+	        strArr.push(",");
         }
         else if(strArr[strArr.length-1]===",") strArr.pop();
-        if(typeof obj[p] === 'number') {
-            strArr.push("\""+obj[p]+"\"");
-        }
-        else strArr.push(stringifyJSON(obj[p]));
-        strArr.push(",");
       }
       if(strArr[strArr.length-1]===",") strArr.pop();
       strArr.push("}");
