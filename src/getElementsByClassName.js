@@ -11,16 +11,13 @@ var getElementsByClassName = function (className) {
 };
 
 var findNodes = function(node, className, array) {
-	for(var p in node) {
-		var name = node[p].className;
+	for(var i = 0; i < node.length; i++) {		
+		var name = node[i].className;
 		if(typeof name === 'string') {
 			if(name.indexOf("green") !== -1) {
-				//console.log(node[p]);
-				array.push(node[p]);				
+				array.push(node[i]);				
 			}
 		}
-	}
-	for(var i = 0; i < node.length; i++) {		
 		findNodes(node[i].childNodes, className, array);
 	}
 };
