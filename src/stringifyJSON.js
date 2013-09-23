@@ -12,23 +12,17 @@ var stringifyJSON = function (obj) {
     }).join(",") + ']';
   }
   else if(obj && typeof obj === 'object') {
-    var subStr = '';
+    var subArr = [];
     for(var i in obj) {
       if(typeof obj[i] !== 'function') {
-        subStr += stringifyJSON(i) + ':' + stringifyJSON(obj[i]);
+        subArr.push(stringifyJSON(i) + ':' + stringifyJSON(obj[i]));
       }
       else {
         return '{}';
       }
     }
-    return '{' + subStr + '}';
+    return '{' + subArr.join(",") + '}';
   }
-  //   return '{' + _(obj).map(function(val, key) {
-  //     if(typeof val !== 'function') {
-  //       return stringifyJSON(key) + ':' + stringifyJSON(val);
-  //     }
-  //   }) + '}';
-  // }
   else {
      return "" + obj;
   }
