@@ -8,9 +8,27 @@ var stringifyJSON = function (obj) {
   }
   else if(Array.isArray(obj)) {
     return '[' + _(obj).map(function(item) {
-      return stringifyJSON(item)
+      return stringifyJSON(item);
     }).join(",") + ']';
   }
+  else if(obj && typeof obj === 'object') {
+    var subStr = '';
+    for(var i in obj) {
+      if(typeof obj[i] !== 'function') {
+        subStr += stringifyJSON(i) + ':' + stringifyJSON(obj[i]);
+      }
+      else {
+        return '{}';
+      }
+    }
+    return '{' + subStr + '}';
+  }
+  //   return '{' + _(obj).map(function(val, key) {
+  //     if(typeof val !== 'function') {
+  //       return stringifyJSON(key) + ':' + stringifyJSON(val);
+  //     }
+  //   }) + '}';
+  // }
   else {
      return "" + obj;
   }
