@@ -3,13 +3,17 @@
 
 // but you don't so you're going to have to write it from scratch:
 var stringifyJSON = function (obj) {
-	if(typeof obj==='string') {
-		return '"' + obj + '"';
-	}
-	else {
-		return "" + obj;
-	}
-
+  if(typeof obj==='string') {
+    return '"' + obj + '"';
+  }
+  else if(Array.isArray(obj)) {
+    return '[' + _(obj).map(function(item) {
+      return stringifyJSON(item)
+    }).join(",") + ']';
+  }
+  else {
+     return "" + obj;
+  }
 };
 
 
