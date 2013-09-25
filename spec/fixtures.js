@@ -24,6 +24,7 @@ var validObjects = [
 
 // used for stringifyJSON spec
 var weirdObjects = [
+  function(){},
   {
     "functions": function(){},
     "undefined": undefined
