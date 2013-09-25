@@ -18,9 +18,9 @@ var getElementsByClassName = function (className, node) {
   return results;
 }
 
-$(document).ready(function() {
-  console.log(getElementsByClassName("green"));
-});
+// $(document).ready(function() {
+//   console.log(getElementsByClassName("green"));
+// });
 
 
 // 	var array=[];
